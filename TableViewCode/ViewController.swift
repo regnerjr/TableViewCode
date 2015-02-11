@@ -4,10 +4,35 @@ class ViewController: UITableViewController {
 
     let modelData = [1,2,3,4,5,6]
 
+
+    override func loadView() {
+        println("Calling Load View")
+        view = UIView(frame: UIScreen.mainScreen().bounds)
+        tableView = UITableView(frame: CGRectZero, style: UITableViewStyle.Plain)
+        view.addSubview(tableView)
+    }
+
+    override func updateViewConstraints() {
+        super.updateViewConstraints()
+        println("Updating Constraints")
+    }
+
     override func viewDidLoad() {
         tableView.registerClass(TableViewCell.self, forCellReuseIdentifier: "reuseIdentifier")
         //make the tableView not be under the status bar!
-        tableView.contentInset = UIEdgeInsets(top: UIApplication.sharedApplication().statusBarFrame.size.height, left: 0, bottom: 0, right: 0)
+    }
+
+    override func viewDidLayoutSubviews() {
+        let vc = view.constraints()
+        view.setTranslatesAutoresizingMaskIntoConstraints(false)
+        println(vc)
+        let tvc = tableView.constraints()
+        tableView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        println(tvc)
+
+        let topBarConstraint = getFullScreenExceptStatusBarConstraints(tableView, self.topLayoutGuide)
+        tableView.addConstraints(topBarConstraint)
+        view.setNeedsLayout()
     }
 
 }
@@ -37,4 +62,16 @@ extension ViewController: UITableViewDelegate {
         cell?.toggleCheckmark()
         cell?.selected = false
     }
+}
+
+func getFullScreenExceptStatusBarConstraints(view: UIView, toplayoutGuide: UILayoutSupport) -> [NSLayoutConstraint]{
+
+    let viewsDict: [NSObject: AnyObject] = ["view" : view, "topGuide" : toplayoutGuide]
+//    let horizontalconstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:[topGuide][view]", options: NSLayoutFormatOptions.AlignAllTop, metrics: nil, views: viewsDict)
+    let bindToTop = NSLayoutConstraint(item: toplayoutGuide, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Top, multiplier: 1, constant: 0)
+
+    println(view.constraints())
+    println(bindToTop)
+    return [bindToTop]
+
 }
