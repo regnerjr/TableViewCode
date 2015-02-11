@@ -31,5 +31,9 @@ extension ViewController: UITableViewDataSource {
 
 
 extension ViewController: UITableViewDelegate {
-
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let cell = tableView.cellForRowAtIndexPath(indexPath) as? TableViewCell
+        cell?.toggleCheckmark()
+        cell?.selected = false
+    }
 }
