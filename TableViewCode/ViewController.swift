@@ -2,7 +2,7 @@ import UIKit
 
 class ViewController: UITableViewController {
 
-    let stuff = [1,2,3,4,5,6]
+    let modelData = [1,2,3,4,5,6]
 
     override func viewDidLoad() {
         tableView.registerClass(TableViewCell.self, forCellReuseIdentifier: "reuseIdentifier")
@@ -20,12 +20,12 @@ extension ViewController: UITableViewDataSource {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return stuff.count
+        return modelData.count
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as! UITableViewCell
-        cell.textLabel?.text = String(stuff[indexPath.row])
+        cell.textLabel?.text = String(modelData[indexPath.row])
         return cell
     }
 }
