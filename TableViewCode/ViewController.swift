@@ -6,7 +6,7 @@ class ViewController: UITableViewController {
 
     override func viewDidLoad() {
         //else your cell reuse will crash
-        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "reuseIdentifier")
+        tableView.registerClass(TableViewCell.self, forCellReuseIdentifier: "reuseIdentifier")
     }
 
 }
