@@ -5,17 +5,17 @@ class ViewController: UITableViewController {
     let modelData = [1,2,3,4,5,6]
 
 
-    override func loadView() {
-        println("Calling Load View")
-        view = UIView(frame: UIScreen.mainScreen().bounds)
-        tableView = UITableView(frame: CGRectZero, style: UITableViewStyle.Plain)
-        view.addSubview(tableView)
-    }
+//    override func loadView() {
+//        println("Calling Load View")
+//        view = UIView(frame: UIScreen.mainScreen().bounds)
+//        tableView = UITableView(frame: CGRectZero, style: UITableViewStyle.Plain)
+//        view.addSubview(tableView)
+//    }
 
-    override func updateViewConstraints() {
-        super.updateViewConstraints()
-        println("Updating Constraints")
-    }
+//    override func updateViewConstraints() {
+//        super.updateViewConstraints()
+//        println("Updating Constraints")
+//    }
 
     override func viewDidLoad() {
         tableView.registerClass(TableViewCell.self, forCellReuseIdentifier: "reuseIdentifier")
@@ -23,6 +23,7 @@ class ViewController: UITableViewController {
     }
 
     override func viewDidLayoutSubviews() {
+        println("viewDidLayoutSubviews")
         let vc = view.constraints()
         view.setTranslatesAutoresizingMaskIntoConstraints(false)
         println(vc)
