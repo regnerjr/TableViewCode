@@ -6,8 +6,7 @@ class ViewController: UITableViewController {
 
     override func viewDidLoad() {
         tableView.registerClass(TableViewCell.self, forCellReuseIdentifier: "reuseIdentifier")
-        //make the tableView not be under the status bar!
-        tableView.contentInset = UIEdgeInsets(top: UIApplication.sharedApplication().statusBarFrame.size.height, left: 0, bottom: 0, right: 0)
+        tableView.registerClass(UITableViewHeaderFooterView.self, forHeaderFooterViewReuseIdentifier: "TableViewHeader")
     }
 
 }
@@ -32,9 +31,22 @@ extension ViewController: UITableViewDataSource {
 
 
 extension ViewController: UITableViewDelegate {
+
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let cell = tableView.cellForRowAtIndexPath(indexPath) as? TableViewCell
         cell?.toggleCheckmark()
         cell?.selected = false
     }
+
+    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return UIApplication.sharedApplication().statusBarFrame.height
+    }
+
+    //make the tableView not be under the status bar!
+    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = tableView.dequeueReusableHeaderFooterViewWithIdentifier("TableViewHeader") as! UITableViewHeaderFooterView
+        header.contentView.backgroundColor = UIColor.whiteColor()
+        return header
+    }
+
 }
