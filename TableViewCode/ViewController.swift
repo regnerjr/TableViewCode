@@ -28,7 +28,7 @@ class ViewController: UITableViewController {
         view.setTranslatesAutoresizingMaskIntoConstraints(false)
         println(vc)
         let tvc = tableView.constraints()
-        tableView.setTranslatesAutoresizingMaskIntoConstraints(false)
+
         println(tvc)
 
         let topBarConstraint = getFullScreenExceptStatusBarConstraints(tableView, self.topLayoutGuide)
@@ -68,11 +68,11 @@ extension ViewController: UITableViewDelegate {
 func getFullScreenExceptStatusBarConstraints(view: UIView, toplayoutGuide: UILayoutSupport) -> [NSLayoutConstraint]{
 
     let viewsDict: [NSObject: AnyObject] = ["view" : view, "topGuide" : toplayoutGuide]
-//    let horizontalconstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:[topGuide][view]", options: NSLayoutFormatOptions.AlignAllTop, metrics: nil, views: viewsDict)
-    let bindToTop = NSLayoutConstraint(item: toplayoutGuide, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Top, multiplier: 1, constant: 0)
+    let horizontalconstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:[topGuide][view]", options: NSLayoutFormatOptions.allZeros, metrics: nil, views: viewsDict) as! [NSLayoutConstraint]
+//    let bindToTop = NSLayoutConstraint(item: toplayoutGuide, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Top, multiplier: 1, constant: 0)
 
     println(view.constraints())
-    println(bindToTop)
-    return [bindToTop]
+    println(horizontalconstraints)
+    return horizontalconstraints
 
 }
