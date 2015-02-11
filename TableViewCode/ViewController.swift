@@ -5,8 +5,9 @@ class ViewController: UITableViewController {
     let stuff = [1,2,3,4,5,6]
 
     override func viewDidLoad() {
-        //else your cell reuse will crash
         tableView.registerClass(TableViewCell.self, forCellReuseIdentifier: "reuseIdentifier")
+        //make the tableView not be under the status bar!
+        tableView.contentInset = UIEdgeInsets(top: UIApplication.sharedApplication().statusBarFrame.size.height, left: 0, bottom: 0, right: 0)
     }
 
 }
